@@ -1,7 +1,9 @@
 FROM ubuntu:12.04
 RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list \
 && apt-get update \
-&& apt-get install -y git libtool autoconf pkg-config build-essential g++ bison flex libssl-dev automake libboost-all-dev libevent-dev supervisor
+&& apt-get upgrade -y \
+&& apt-get install -y git libtool autoconf pkg-config build-essential g++ bison flex libssl-dev automake libboost-all-dev libevent-dev supervisor \
+&& rm -rf /var/lib/apt/lists/*
 ENV thrift_src /usr/local/src/thrift
 RUN git clone https://github.com/apache/thrift.git $thrift_src \
 && cd $thrift_src && git checkout 0.9.1 \
