@@ -19,6 +19,8 @@ RUN git clone https://github.com/facebook/scribe.git $scribe_src \
 && make && make install
 ENV LD_LIBRARY_PATH /usr/local/lib
 RUN echo "export LD_LIBRARY_PATH=/usr/local/lib" >> /etc/profile
+COPY scribe.conf /etc/scribe.conf
+RUN rm -rf /usr/local/src/
 RUN mkdir -p /var/log/supervisor
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 EXPOSE 1463
